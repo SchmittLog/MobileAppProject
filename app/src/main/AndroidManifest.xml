@@ -10,6 +10,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FinalProject">
         <activity
+            android:name=".IndividualLocation"
+            android:exported="false"
+            android:label="@string/title_activity_individual_location"
+            android:theme="@style/Theme.FinalProject.NoActionBar" />
+        <activity
+            android:name=".ListLocations"
+            android:exported="false"
+            android:label="@string/title_activity_list_locations"
+            android:theme="@style/Theme.FinalProject.NoActionBar" />
+        <activity
             android:name=".AddLocation"
             android:exported="false"
             android:label="@string/title_activity_add_location"
