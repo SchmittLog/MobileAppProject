@@ -4,20 +4,17 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
-import com.example.finalproject.databinding.ActivityListLocationsBinding
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class ListLocations : AppCompatActivity() {
+    private var latitude = 0.0
+    private var longitude = 0.0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.activity_list_locations)
         setSupportActionBar(findViewById(R.id.toolbar))
 
@@ -29,6 +26,8 @@ class ListLocations : AppCompatActivity() {
 
         //temp button to move to detailed entry screen
         val testButton = findViewById<Button>(R.id.tempBtn)
+        val lat = findViewById<TextView>(R.id.Latitude)
+        val lon = findViewById<TextView>(R.id.Longitude)
 
         var individualLocationLauncher  = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
@@ -37,7 +36,11 @@ class ListLocations : AppCompatActivity() {
         }
 
         testButton.setOnClickListener{
-            val intent = Intent(this@ListLocations, IndividualLocation::class.java)
+            val intent = Intent(this@ListLocations, MapsActivity::class.java)
+            latitude = lat.text.toString().toDouble()
+            longitude = lon.text.toString().toDouble()
+            intent.putExtra("latitude", latitude)
+            intent.putExtra("longitude", longitude)
             individualLocationLauncher.launch(intent)
         }
     }
